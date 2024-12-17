@@ -1,0 +1,55 @@
+class Solution {
+    public boolean check(int[] nums) {
+        int length = nums.length;
+        int min = Integer.MAX_VALUE;
+        int minIndex = 0;
+        boolean result = true;
+        int firstMinIndex = 0;
+
+        for (int i = 0; i < length; i++) {
+            if (nums[i] < min) {
+                min = nums[i];
+            }
+        }
+
+        for (int i = 0; i < length; i++) {
+            if (nums[i] == min ) {
+                minIndex = i;
+               
+            }
+        }
+
+         for (int i = 0; i < length; i++) {
+            if (nums[i] == min ) {
+                firstMinIndex = i;
+               break;
+            }
+        }
+
+        int i = (minIndex + 1) % length;
+        int j = minIndex;
+        int count=0;
+        while (i != minIndex) {
+            if(i==firstMinIndex){
+                break;
+            }
+            
+            if (nums[i] < nums[j] ) {
+                result = false;
+                break;
+            }
+            if(nums[i]==min ){
+                count++;
+                if(count==3){
+                    break;
+                }
+                continue;
+            }
+            
+            i = (i + 1) % length;
+            j = (j + 1) % length;
+        }
+
+        return result;
+    }
+}
